@@ -1,10 +1,6 @@
 package client;
 
-import client.codec.OperationToRequestMessageEncoder;
-import client.codec.OrderFrameDecoder;
-import client.codec.OrderFrameEncoder;
-import client.codec.OrderProtocolDecoder;
-import client.codec.OrderProtocolEncoder;
+import client.codec.*;
 import client.handler.dispatcher.OperationResultFuture;
 import client.handler.dispatcher.RequestPendingCenter;
 import client.handler.dispatcher.ResponseDispatcherHandler;
@@ -16,14 +12,12 @@ import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-import java.security.cert.CertificateException;
-import java.util.concurrent.ExecutionException;
-import javax.net.ssl.SSLException;
 import util.IdUtil;
+
+import java.util.concurrent.ExecutionException;
 
 /**
  * @author: r.hu
@@ -39,6 +33,8 @@ public class Client {
         LoggingHandler loggingHandler = new LoggingHandler(LogLevel.INFO);
         RequestPendingCenter pendingCenter = new RequestPendingCenter();
 
+
+        
         Bootstrap bootstrap = new Bootstrap();
         try {
             bootstrap.channel(NioSocketChannel.class)
